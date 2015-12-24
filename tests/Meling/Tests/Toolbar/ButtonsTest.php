@@ -49,6 +49,15 @@ class ButtonsTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array($button), $this->buttons->asArray());
     }
 
+    public function testAddModal()
+    {
+        $button = new \Meling\Toolbar\Buttons\Modal(
+            'Confirm', 'Подтвердить', null, null, true
+        );
+        $this->buttons->addModal('Confirm', 'Подтвердить');
+        $this->assertEquals(array($button), $this->buttons->asArray());
+    }
+
     public function testAddNew()
     {
         $button = new \Meling\Toolbar\Buttons\Standard(

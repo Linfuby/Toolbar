@@ -44,6 +44,11 @@ class Buttons
         );
     }
 
+    public function addModal($task, $title, $iconClass = '', $buttonClass = '', $check = true)
+    {
+        $this->append('modal', $task, $title, $iconClass, $buttonClass, $check);
+    }
+
     public function addNew($title = 'Создать', $iconClass = 'uk-icon-plus', $buttonClass = 'uk-button-primary')
     {
         $this->append('standard', 'create', $title, $iconClass, $buttonClass, false);
