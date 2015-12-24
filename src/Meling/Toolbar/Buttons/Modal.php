@@ -10,6 +10,6 @@ class Modal extends Button
             $iconClass = '<i class="' . $this->iconClass . '"></i>&nbsp;';
         }
 
-        return '<button class="uk-button ' . $this->buttonClass . '" data-uk-modal="{target: \'#' . $this->task . '\'}">' . $iconClass . $this->title . '</button>';
+        return '<button class="uk-button ' . $this->buttonClass . '" data-uk-modal="{target: \'#' . $this->task . '\'}" onclick="return false;">' . $iconClass . $this->title . '</button>';
     }
 }

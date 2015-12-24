@@ -50,7 +50,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
             $data[] = (object)$item;
         }
         $filter = new \Meling\Toolbar\Filters\Filter(
-            $this->title, $this->name, $this->data, $this->selected, $this->itemId, $this->itemName
+            $this->title, $this->name, $this->data, 2, $this->itemId, $this->itemName
         );
         $this->assertEquals(array_merge($this->default, $data), $filter->data());
     }

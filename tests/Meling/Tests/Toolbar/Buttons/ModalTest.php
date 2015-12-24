@@ -22,7 +22,7 @@ class ModalTest extends \PHPUnit_Framework_TestCase
     {
         $this->task        = 'Confirm';
         $this->title       = 'Подтвердить';
-        $this->iconClass   = null;
+        $this->iconClass   = 'uk-icon-confirm';
         $this->buttonClass = '';
         $this->check       = '';
         $this->button      = new \Meling\Toolbar\Buttons\Modal(
@@ -47,7 +47,7 @@ class ModalTest extends \PHPUnit_Framework_TestCase
 
     public function testRender()
     {
-        $html = "<button class=\"uk-button {$this->buttonClass}\" data-uk-modal=\"{target: '#{$this->task}'}\">";
+        $html = "<button class=\"uk-button {$this->buttonClass}\" data-uk-modal=\"{target: '#{$this->task}'}\" onclick=\"return false;\">";
         if ($this->iconClass) {
             $html .= "<i class=\"{$this->iconClass}\"></i>&nbsp;";
         }
