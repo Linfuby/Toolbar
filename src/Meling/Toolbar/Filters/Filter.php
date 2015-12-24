@@ -33,12 +33,12 @@ class Filter
         if (is_array($data)) {
             foreach ($data as $item) {
                 if (is_object($item)) {
-                    $this->data[] = $item;
+                    $this->data[$item->$itemId] = $item;
                     if ((string)$item->$itemId === (string)$selected) {
                         $this->selected = $item->$itemId;
                     }
                 } elseif (is_array($item)) {
-                    $this->data[] = (object)$item;
+                    $this->data[$item[$itemId]] = (object)$item;
                     if (isset($item[$itemId]) && (string)$item[$itemId] === (string)$selected) {
                         $this->selected = $item[$itemId];
                     }
@@ -70,7 +70,7 @@ class Filter
 
     public function title()
     {
-        return $this->title;
+        return $this->selected === '' ? $this->title : $this->data[$this->selected]->name;
     }
 
 }
