@@ -10,7 +10,14 @@ class ButtonsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $builder       = new \Meling\Toolbar\Builder();
+        $slice          = new \PHPixie\Slice();
+        $filesystem     = new \PHPixie\Filesystem();
+        $locatorConfig  = $slice->arrayData(array('directory' => '/layout/'));
+        $templateConfig = $slice->arrayData(array());
+        $root           = $filesystem->root(__DIR__);
+        $locator        = $filesystem->buildlocator($locatorConfig, $root);
+        $template       = new \PHPixie\Template($slice, $locator, $templateConfig);
+        $builder        = new \Meling\Toolbar\Builder($template);
         $this->buttons = new \Meling\Toolbar\Buttons($builder);
     }
 

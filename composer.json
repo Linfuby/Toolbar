@@ -1,24 +1,26 @@
 {
-    "name": "meling/toolbar",
-    "description": "Toolbar for Back-End",
-    "keywords": [
-        "toolbar"
-    ],
-    "homepage": "http://meling.ru",
-    "type": "library",
-    "license": "BSD",
-    "authors": [
-        {
-            "name": "Vadim Meling",
-            "email": "support@meling.ru"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Meling\\": "src/Meling",
-            "Meling\\Tests\\": "tests/Meling/Tests"
-        }
-    },
-    "require": {
+  "name": "meling/toolbar",
+  "description": "Toolbar for Back-End",
+  "keywords": [
+    "toolbar"
+  ],
+  "homepage": "http://meling.ru",
+  "type": "library",
+  "license": "BSD",
+  "authors": [
+    {
+      "name": "Vadim Meling",
+      "email": "support@meling.ru"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Meling\\": "src/Meling",
+      "Meling\\Tests\\": "tests/Meling/Tests"
+    }
+  },
+  "require": {
+    "phpixie/template": "3.*@dev",
+    "phpixie/filesystem": "3.*@dev"
+  }
 }

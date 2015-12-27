@@ -5,9 +5,17 @@ class Toolbar
 {
     protected $builder;
 
-    public function __construct()
+    /**
+     * @param \PHPixie\Template $template
+     */
+    public function __construct($template)
     {
-        $this->builder = $this->buildBuilder();
+        $this->builder = $this->buildBuilder($template);
+    }
+
+    public function title()
+    {
+        return $this->builder->title();
     }
 
     public function buttons()
@@ -20,8 +28,12 @@ class Toolbar
         return $this->builder->filters();
     }
 
-    protected function buildBuilder()
+    /**
+     * @param \PHPixie\Template $template
+     * @return \Meling\Toolbar\Builder
+     */
+    protected function buildBuilder($template)
     {
-        return new Toolbar\Builder();
+        return new Toolbar\Builder($template);
     }
 }

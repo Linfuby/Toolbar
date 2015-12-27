@@ -10,7 +10,14 @@ class BuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->builder = new \Meling\Toolbar\Builder();
+        $slice          = new \PHPixie\Slice();
+        $filesystem     = new \PHPixie\Filesystem();
+        $locatorConfig  = $slice->arrayData(array('directory' => '/layout/'));
+        $templateConfig = $slice->arrayData(array());
+        $root           = $filesystem->root(__DIR__);
+        $locator        = $filesystem->buildlocator($locatorConfig, $root);
+        $template       = new \PHPixie\Template($slice, $locator, $templateConfig);
+        $this->builder  = new \Meling\Toolbar\Builder($template);
     }
 
     public function testButton()

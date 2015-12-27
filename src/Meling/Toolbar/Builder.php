@@ -4,19 +4,21 @@ namespace Meling\Toolbar;
 class Builder
 {
     protected $instances = array();
+    protected $template;
 
     /**
      * Builder constructor.
+     *
+     * @param \PHPixie\Template $template
      */
-    public function __construct()
+    public function __construct(\PHPixie\Template $template)
     {
+        $this->template = $template;
     }
 
-    public function buildButton($type, $task, $title, $iconClass, $buttonClass, $check)
+    public function buildButton($task, $title, $icon = '', $class = '', $attributes = array())
     {
-        $class = '\Meling\Toolbar\Buttons\\' . ucfirst($type);
-
-        return new $class($task, $title, $iconClass, $buttonClass, $check);
+        return new Buttons\Button($task, $title, $icon, $class, $attributes);
     }
 
     public function buildFilter($title, $name, $data, $selected = null, $itemId = 'id', $itemName = 'name')
@@ -40,9 +42,22 @@ class Builder
         return $this->instance('filters');
     }
 
+    /**
+     * @return Title
+     */
+    public function title()
+    {
+        return $this->instance('title');
+    }
+
     protected function buildButtons()
     {
         return new Buttons($this);
+    }
+
+    protected function buildTitle()
+    {
+        return new Title($this, $this->template->get('title'));
     }
 
     protected function buildFilters()

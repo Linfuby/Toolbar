@@ -14,59 +14,69 @@ class Buttons
     protected $buttons = array();
 
     /**
-     * Filters constructor.
-     * @param Builder $builder
+     * Buttons constructor.
+     *
+     * @param \Meling\Toolbar\Builder     $builder
+     * @param \PHPixie\Template\Container $container
      */
-    public function __construct(Builder $builder)
+    public function __construct(\Meling\Toolbar\Builder $builder, \PHPixie\Template\Container $container)
     {
-        $this->builder = $builder;
+        $this->builder   = $builder;
+        $this->container = $container;
     }
 
-    public function add($task, $title, $iconClass = '', $buttonClass = '', $check = false)
+    public function add($task, $title, $icon = '', $class = '', $attributes = array())
     {
-        $this->append('standard', $task, $title, $iconClass, $buttonClass, $check);
+        $this->buttons[] = $this->builder->buildButton($task, $title, $icon, $class, $attributes);
     }
 
-    public function addApply($title = 'Сохранить', $iconClass = 'uk-icon-check', $buttonClass = 'uk-button-primary')
+    public function render()
     {
-        $this->append('standard', 'apply', $title, $iconClass, $buttonClass, false);
+        $this->container->set('buttons', $this->buttons);
+        return $this->container->render();
     }
 
-    public function addCancel($title = 'Отменить', $iconClass = 'uk-icon-arrow-left', $buttonClass = '')
+    public function addCreate(
+        $task = 'create',
+        $title = '�������',
+        $icon = 'uk-icon-plus',
+        $class = 'uk-button-primary',
+        $attributes = array()
+    )
     {
-        $this->append('standard', 'default', $title, $iconClass, $buttonClass, false);
+        $this->buttons[] = $this->builder->buildButton($task, $title, $icon, $class, $attributes);
     }
 
-    public function addDelete($title = 'Удалить', $iconClass = 'uk-icon-trash', $buttonClass = 'uk-button-danger')
+    public function addDelete(
+        $task = 'delete',
+        $title = '�������',
+        $icon = 'uk-icon-trash',
+        $class = 'uk-text-danger',
+        $attributes = array()
+    )
     {
-        $this->append(
-            'standard', 'delete', $title, $iconClass, $buttonClass, 'Вы действительно хотите совершить данное действие?'
-        );
+        $this->buttons[] = $this->builder->buildButton($task, $title, $icon, $class, $attributes);
     }
 
-    public function addModal($task, $title, $iconClass = '', $buttonClass = '', $check = true)
+    public function addSave(
+        $task = 'save',
+        $title = '���������',
+        $icon = 'uk-icon-save',
+        $class = 'uk-button-success',
+        $attributes = array()
+    )
     {
-        $this->append('modal', $task, $title, $iconClass, $buttonClass, $check);
+        $this->buttons[] = $this->builder->buildButton($task, $title, $icon, $class, $attributes);
     }
 
-    public function addNew($title = 'Создать', $iconClass = 'uk-icon-plus', $buttonClass = 'uk-button-primary')
-    {
-        $this->append('standard', 'create', $title, $iconClass, $buttonClass, false);
-    }
-
-    public function addSave($title = 'Сохранить и закрыть', $iconClass = 'uk-icon-check', $buttonClass = '')
-    {
-        $this->append('standard', 'save', $title, $iconClass, $buttonClass, false);
-    }
-
-    public function asArray()
-    {
-        return $this->buttons;
-    }
-
-    protected function append($type, $task, $title, $iconClass, $buttonClass, $check)
-    {
-        $this->buttons[] = $this->builder->buildButton($type, $task, $title, $iconClass, $buttonClass, $check);
+    public function addApply(
+        $task = 'apply',
+        $title = '���������',
+        $icon = 'uk-icon-save',
+        $class = 'uk-text-success',
+        $attributes = array()
+    ) {
+        $this->buttons[] = $this->builder->buildButton($task, $title, $icon, $class, $attributes);
     }
 
 }
