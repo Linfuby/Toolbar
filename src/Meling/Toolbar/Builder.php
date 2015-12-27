@@ -52,12 +52,12 @@ class Builder
 
     protected function buildButtons()
     {
-        return new Buttons($this);
+        return new Buttons($this, $this->template->get('admin:layouts:toolbar/buttons'));
     }
 
     protected function buildTitle()
     {
-        return new Title($this, $this->template->get('title'));
+        return new Title($this, $this->template->get('admin:layouts:toolbar/title'));
     }
 
     protected function buildFilters()
