@@ -8,7 +8,7 @@ $buttons = $this->get('buttons');
 <div class="uk-button-group">
     <?php foreach ($buttons as $button) { ?>
         <button onclick="<?= $button->getTask(); ?>return false;"
-                class="<?= $button->getClass(); ?>" <?= $button->getAttributes(); ?>>
+                class="uk-button <?= $button->getClass(); ?>" <?= $button->getAttributes(); ?>>
             <?php if ($button->getIcon()) { ?><i class="<?= $button->getIcon(); ?>"></i>&nbsp;<?php } ?>
             <?= $button->getTitle(); ?>
         </button>

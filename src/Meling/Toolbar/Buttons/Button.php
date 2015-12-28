@@ -3,45 +3,49 @@ namespace Meling\Toolbar\Buttons;
 
 class Button
 {
-    protected $title;
-    protected $task;
-    protected $icon;
-    protected $class;
     protected $attributes;
 
+    protected $class;
+
+    protected $icon;
+
+    protected $task;
+
+    protected $title;
 
     /**
      * Button constructor.
-     *
      * @param string $task
      * @param string $title
      * @param string $icon
      * @param string $class
      * @param array  $attributes
      */
-    public function __construct($task, $title, $icon = '', $class = '', $attributes = array())
+    public function __construct($task, $title, $icon = '', $class = '', $checked = false, $attributes = array())
     {
-        $this->task       = 'sendForm(' . $task . ');';
+        $this->task       = 'sendForm(\'' . $task . '\', \'' . $checked . '\');';
         $this->title      = $title;
         $this->icon       = $icon;
         $this->class      = $class;
         $this->attributes = $attributes;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+    public function getAttributes()
     {
-        return $this->title;
+        $html = '';
+        foreach ($this->attributes as $key => $value) {
+            $html .= ' ' . $key . '="' . $value . '"';
+        }
+
+        return $html;
     }
 
     /**
      * @return mixed
      */
-    public function getTask()
+    public function getClass()
     {
-        return $this->task;
+        return $this->class;
     }
 
     /**
@@ -55,14 +59,17 @@ class Button
     /**
      * @return mixed
      */
-    public function getClass()
+    public function getTask()
     {
-        return $this->class;
+        return $this->task;
     }
 
-    public function getAttributes()
+    /**
+     * @return mixed
+     */
+    public function getTitle()
     {
-        return http_build_str($this->attributes);
+        return $this->title;
     }
 
 }
