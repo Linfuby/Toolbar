@@ -24,23 +24,21 @@ class Filter
     {
         $this->title    = $title;
         $this->name     = $name;
-        $item           = (object)array(
-            $itemId   => '',
-            $itemName => ' - - - ',
-        );
-        $this->data     = array($item);
-        $this->selected = $item->$itemId;
-        if (is_array($data)) {
-            foreach ($data as $item) {
-                if (is_object($item)) {
-                    $this->data[$item->$itemId] = $item;
-                    if ((string)$item->$itemId === (string)$selected) {
-                        $this->selected = $item->$itemId;
+        $this->itemId   = $itemId;
+        $this->itemName = $itemName;
+        $this->data     = array(0 => ' - - - ');
+        $this->selected = 0;
+        if(is_array($data)) {
+            foreach($data as $item) {
+                if(is_object($item)) {
+                    $this->data[$item->{$this->itemId}] = $item->{$this->itemName};
+                    if((string)$item->{$this->itemId} === (string)$selected) {
+                        $this->selected = $item->{$this->itemId};
                     }
-                } elseif (is_array($item)) {
-                    $this->data[$item[$itemId]] = (object)$item;
-                    if (isset($item[$itemId]) && (string)$item[$itemId] === (string)$selected) {
-                        $this->selected = $item[$itemId];
+                } elseif(is_array($item)) {
+                    $this->data[$item[$this->itemId]] = $item[$this->itemName];
+                    if(isset($item[$this->itemId]) && (string)$item[$this->itemId] === (string)$selected) {
+                        $this->selected = $item[$this->itemId];
                     }
                 }
             }
@@ -58,6 +56,14 @@ class Filter
     /**
      * @return mixed
      */
+    public function id()
+    {
+        return $this->{$this->itemId};
+    }
+
+    /**
+     * @return mixed
+     */
     public function name()
     {
         return $this->name;
@@ -70,7 +76,7 @@ class Filter
 
     public function title()
     {
-        return $this->selected === '' ? $this->title : $this->data[$this->selected]->name;
+        return !$this->selected ? $this->title : $this->data[$this->selected];
     }
 
 }
